@@ -1,4 +1,4 @@
-```markdown
+
 # 🏢 TechLab Products API - Sistema de Gestión de Productos
 
 ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
@@ -9,30 +9,33 @@
 
 ## 🔸 Introducción
 
-**"Este proyecto representa un desafío real: construir una API REST completa con autenticación segura, base de datos en la nube y arquitectura profesional. La misión es crear un sistema que permita gestionar productos desde cualquier frontend, con seguridad empresarial y escalabilidad en mente."**
+Este proyecto consiste en el desarrollo de una **API REST completa**, con autenticación segura, base de datos en la nube y arquitectura profesional basada en capas.  
 
-**"Cada endpoint que desarrolles será consumido por aplicaciones reales, demostrando tu capacidad para integrar servicios en la nube, manejar tokens JWT y estructurar proyectos siguiendo buenas prácticas de desarrollo. Es tu oportunidad de mostrar habilidades técnicas aplicadas a un entorno de producción real."**
+El objetivo es ofrecer un sistema robusto que permita gestionar productos desde cualquier frontend, integrando **Firebase Firestore**, **autenticación JWT**, y un **dashboard web totalmente funcional**.
+
+Cada endpoint está diseñado siguiendo buenas prácticas y un enfoque modular, ideal para entornos reales de producción.
+
+---
 
 ## 📌 Requerimientos del Proyecto
 
 ### 🎯 Requisito #1: Configuración Inicial
 
-**Crea un directorio para tu proyecto e incluye un archivo index.js como punto de entrada.**
-
-**Inicializa Node.js:**
+**1. Crear directorio e iniciar Node.js:**
 ```bash
 npm init -y
-```
+````
 
-**En el archivo package.json, agrega:**
+**2. Agregar `"type": "module"` al `package.json`:**
+
 ```json
 {
   "type": "module"
 }
 ```
-*Esto habilitará el uso de ESModules.*
 
-**Crea scripts para ejecutar el programa:**
+**3. Agregar scripts de ejecución:**
+
 ```json
 {
   "scripts": {
@@ -42,254 +45,240 @@ npm init -y
 }
 ```
 
-**Instala las dependencias necesarias:**
+**4. Instalar dependencias principales:**
+
 ```bash
 npm install express cors body-parser dotenv firebase jsonwebtoken bcryptjs
 ```
 
-🧠 **"Este setup inicial es fundamental para asegurar un entorno profesional, con todas las herramientas necesarias para un proyecto empresarial real."**
-
 ### 🧰 Requisito #2: Arquitectura del Proyecto
 
-**La aplicación sigue una arquitectura en capas que separa claramente las responsabilidades:**
-- **Routes** - Definición de endpoints HTTP
-- **Controllers** - Lógica de manejo de peticiones
-- **Services** - Lógica de negocio y validaciones
-- **Models** - Interacción con Firebase Firestore
-- **Middlewares** - Autenticación y manejo de errores
-- **Config** - Configuración de servicios externos
+La aplicación sigue una **arquitectura en capas**:
+
+* **Routes** → Definición de endpoints HTTP
+* **Controllers** → Manejo de peticiones y respuestas
+* **Services** → Lógica de negocio
+* **Models** → Interacción con Firestore
+* **Middlewares** → Autenticación y manejo de errores
+* **Config** → Configuración de Firebase y servicios externos
+
+---
 
 ## 🚀 Funcionalidades
 
 ### 1. 🔐 Sistema de Autenticación Seguro
-**Ejecuta el servidor y accede al dashboard:**
+
+**Iniciar servidor y acceder al dashboard:**
+
 ```bash
 npm start
-# Abre: http://localhost:3000
+# http://localhost:3000
 ```
 
-✅ **El sistema permite registro y login con:**
-- 🎫 Tokens JWT válidos por 1 hora
-- 🔒 Contraseñas hasheadas con bcrypt
-- 👑 Sistema de roles (admin/user)
-- 📧 Validación de formato de email
-- 🛡️ Protección contra datos sensibles
+El sistema incluye:
 
-### 2. 📦 Gestión Completa de Productos
-**Como administrador autenticado:**
+* JWT válidos por 1 hora
+* Contraseñas hasheadas con bcrypt
+* Sistema de roles (admin/user)
+* Validación de email
+* Protección de rutas privadas
 
-✅ **Crear nuevo producto:**
+---
+
+### 2. 📦 Gestión Completa de Productos (solo admin)
+
+#### Crear producto
+
 ```http
 POST /api/products/create
-Authorization: Bearer <tu-token-jwt>
+Authorization: Bearer <token>
 Content-Type: application/json
-
 {
   "name": "Laptop TechLab Pro",
   "price": 1299.99,
-  "category": "tecnología",
+  "category": "tecnologia",
   "stock": 50
 }
 ```
 
-✅ **Actualizar producto existente:**
+#### Actualizar producto
+
 ```http
 PUT /api/products/:id
-Authorization: Bearer <tu-token-jwt>
-Content-Type: application/json
-
+Authorization: Bearer <token>
 {
   "price": 1199.99,
   "stock": 45
 }
 ```
 
-✅ **Eliminar producto:**
+#### Eliminar producto
+
 ```http
 DELETE /api/products/:id
-Authorization: Bearer <tu-token-jwt>
+Authorization: Bearer <token>
 ```
+
+---
 
 ### 3. 👥 Gestión de Usuarios
-**Como administrador:**
 
-✅ **Listar todos los usuarios:**
+#### Listar todos los usuarios (solo admin)
+
 ```http
 GET /api/users
-Authorization: Bearer <tu-token-jwt>
+Authorization: Bearer <token>
 ```
 
-✅ **Obtener usuario específico:**
+#### Obtener usuario por ID
+
 ```http
 GET /api/users/:id
-Authorization: Bearer <tu-token-jwt>
+Authorization: Bearer <token>
 ```
 
-💡 **Importante:** Solo usuarios con rol "admin" pueden gestionar productos y ver la lista completa de usuarios.
+---
 
 ### 4. 🌐 Dashboard Frontend Integrado
-**Accede al dashboard completo:**
+
+Acceso:
+
 ```
 http://localhost:3000
 ```
 
-✅ **Interfaz web completa que incluye:**
-- 🔐 Sistema de login/registro
-- 📊 Visualización de productos
-- 🛠️ CRUD de productos (solo admin)
-- 👤 Información de usuario
-- 🎨 Diseño responsive profesional
+Incluye:
+
+* Login / Registro
+* Vista de usuario
+* CRUD de productos
+* Panel administrador
+* Diseño responsive
+
+---
 
 ## 💡 Tecnologías Implementadas
 
-- ✅ **Express.js** - Framework backend robusto y escalable
-- ✅ **Firebase Firestore** - Base de datos NoSQL en la nube
-- ✅ **JWT (JSON Web Tokens)** - Autenticación stateless segura
-- ✅ **bcrypt** - Hashing de contraseñas para seguridad
-- ✅ **CORS** - Habilitar peticiones de origen cruzado
-- ✅ **dotenv** - Gestión segura de variables de entorno
-- ✅ **Arquitectura MVC** - Separación clara de responsabilidades
+* **Express.js**
+* **Firebase Firestore**
+* **JWT**
+* **bcrypt.js**
+* **CORS**
+* **dotenv**
+* **JavaScript Vanilla (frontend)**
 
-🧭 **"El código mantiene una estructura modular profesional, con validaciones en cada capa y manejo de errores centralizado. La integración con Firebase demuestra capacidad para trabajar con servicios en la nube."**
+---
 
 ## 🧪 Comandos de Ejemplo
 
 ```bash
-# Iniciar servidor en modo desarrollo
-npm run dev
-
-# Iniciar servidor en modo producción
-npm start
+npm run dev       # Modo desarrollo
+npm start         # Producción
 
 # Acceder al dashboard
-# Abre: http://localhost:3000
-
-# Credenciales de prueba:
-# Admin: admin@techlab.com / admin123
-# User: user@techlab.com / user123
+# http://localhost:3000
 ```
+
+### Credenciales de prueba
+
+```
+Admin: admin@techlab.com / admin123
+User : user@techlab.com / user123
+```
+
+---
 
 ## ✨ Características Destacadas
 
-- 🏗️ **Arquitectura Profesional** - MVC con separación de capas
-- 🔐 **Seguridad Empresarial** - JWT, bcrypt, validaciones
-- ☁️ **Base de Datos en la Nube** - Firebase Firestore
-- 🎨 **Dashboard Integrado** - Frontend completo con JavaScript vanilla
-- ⚡ **API REST Completa** - CRUD completo con autenticación
-- 🛡️ **Manejo de Errores** - Centralizado con códigos HTTP apropiados
-- 👑 **Sistema de Roles** - Permisos diferenciados (admin/user)
+* Arquitectura profesional con separación de capas
+* Autenticación JWT + roles
+* Base de datos Firestore en la nube
+* Dashboard web integrado
+* CRUD completo
+* Manejo centralizado de errores
+* Validaciones en cada capa
+
+---
 
 ## 📁 Estructura del Proyecto
 
 ```
 TECHLAB-PRODUCTS-API/
-├── config/                 # Configuración de servicios externos
+├── config/
 │   └── firebase.config.js
-├── controllers/           # Controladores de rutas
+├── controllers/
 │   ├── auth.controller.js
 │   ├── products.controller.js
 │   └── users.controller.js
-├── middlewares/          # Middlewares personalizados
+├── middlewares/
 │   ├── auth.middleware.js
 │   └── error.middleware.js
-├── models/               # Modelos de base de datos
+├── models/
 │   ├── product.model.js
 │   └── user.model.js
-├── public/               # Frontend estático
+├── public/
 │   ├── index.html
 │   ├── app.js
 │   └── styles.css
-├── routes/               # Rutas de la API
+├── routes/
 │   ├── auth.routes.js
 │   ├── products.routes.js
 │   └── users.routes.js
-├── services/             # Lógica de negocio
+├── services/
 │   ├── auth.service.js
 │   ├── products.service.js
 │   └── users.service.js
-├── utils/                # Utilidades
+├── utils/
 │   └── logger.js
-├── .env-example          # Template de variables de entorno
-├── .gitignore           # Archivos ignorados por git
-├── index.js             # Punto de entrada principal
-├── package.json         # Dependencias y scripts
-└── README.md           # Este archivo
+├── .env-example
+├── .gitignore
+├── index.js
+├── package.json
+└── README.md
 ```
 
-## 🛠️ Tecnologías Utilizadas
-
-- **Runtime**: Node.js 18+
-- **Backend Framework**: Express.js
-- **Base de Datos**: Firebase Firestore (NoSQL en la nube)
-- **Autenticación**: JWT + bcrypt
-- **Frontend**: HTML5, CSS3, JavaScript Vanilla
-- **Middleware**: CORS, body-parser, error handling
-- **Desarrollo**: dotenv, ESModules
-
-## 🔧 Funcionalidades Implementadas
-
-### ✅ Sistema de Autenticación Completo
-
-- **POST /auth/login** - Login con JWT
-- **POST /api/users** - Registro de nuevos usuarios
-- **Middleware de autenticación** - Protección de rutas
-- **Middleware de roles** - Control de acceso por permisos
-
-### ✅ CRUD Completo de Productos
-
-- **GET /api/products** - Listar todos los productos (público)
-- **GET /api/products/:id** - Obtener producto específico (público)
-- **POST /api/products/create** - Crear producto (solo admin)
-- **PUT /api/products/:id** - Actualizar producto (solo admin)
-- **DELETE /api/products/:id** - Eliminar producto (solo admin)
-
-### ✅ Gestión de Usuarios
-
-- **GET /api/users** - Listar usuarios (solo admin)
-- **GET /api/users/:id** - Obtener usuario
-- **PUT /api/users/:id** - Actualizar usuario
-
-### ✅ Dashboard Frontend
-
-- **Interfaz completa** - Login, registro, gestión de productos
-- **Comunicación con API** - Fetch API con manejo de headers
-- **Manejo de estado** - Almacenamiento de token y usuario
-- **Validaciones** - Formularios con validación en tiempo real
+---
 
 ## 📋 Requerimientos Cumplidos
 
-| Requerimiento | Estado | Implementación |
-|---------------|--------|----------------|
-| Configuración inicial | ✅ | `npm init -y` y `"type": "module"` |
-| Dependencias instaladas | ✅ | express, cors, body-parser, dotenv, firebase, jsonwebtoken |
-| Servidor Express | ✅ | Configuración completa en `index.js` |
-| Rutas API | ✅ | `/api/products`, `/auth/login` implementadas |
-| Controladores | ✅ | Capa controllers con lógica HTTP |
-| Servicios | ✅ | Capa services con lógica de negocio |
-| Modelos | ✅ | Capa models con Firebase Firestore |
-| Autenticación JWT | ✅ | Middleware de autenticación y protección |
-| Manejo de errores | ✅ | Middleware centralizado con códigos HTTP |
-| Variables de entorno | ✅ | Archivo `.env` con configuración segura |
-| Arquitectura en capas | ✅ | Separación clara de responsabilidades |
-| Protección de rutas | ✅ | Middleware de autenticación y roles |
-| Dashboard frontend | ✅ | Interfaz web completa en `/public/` |
-| Base de datos en la nube | ✅ | Firebase Firestore configurado |
+| Requerimiento         | Estado | Implementación                   |
+| --------------------- | ------ | -------------------------------- |
+| Configuración inicial | ✅      | `"type": "module"` + scripts     |
+| Dependencias          | ✅      | express, firebase, jwt, bcryptjs |
+| Servidor Express      | ✅      | index.js                         |
+| Rutas API             | ✅      | users, products, auth            |
+| Controladores         | ✅      | capa controllers                 |
+| Servicios             | ✅      | capa services                    |
+| Modelos               | ✅      | Firestore                        |
+| Autenticación JWT     | ✅      | middleware + roles               |
+| Manejo de errores     | ✅      | error.middleware.js              |
+| Variables de entorno  | ✅      | .env                             |
+| Dashboard             | ✅      | en `/public/`                    |
+
+---
 
 ## 👨‍💻 Autor
 
-**Emmanuel Mugetti**  
-- 💼 LinkedIn: [Emmanuel Mugetti](https://www.linkedin.com/in/emmanuelmugetti/)
-- 🐙 GitHub: [@Chefe98](https://github.com/Chefe98)
+**Emmanuel Mugetti**
+
+* 💼 LinkedIn: [https://www.linkedin.com/in/emmanuelmugetti/](https://www.linkedin.com/in/emmanuelmugetti/)
+* 🐙 GitHub: [https://github.com/Chefe98](https://github.com/Chefe98)
+
+---
 
 <div align="center">
 
 ## 🧠 Conclusión
 
-**"Más que una simple API, este proyecto demuestra la capacidad de construir sistemas empresariales completos: desde la integración con servicios en la nube hasta la implementación de seguridad profesional y la creación de interfaces de usuario funcionales. Dominar este stack tecnológico es fundamental para cualquier desarrollador backend que aspire a trabajar en entornos de producción reales."**
+Este proyecto demuestra la capacidad de construir un sistema moderno, seguro y escalable con tecnologías actuales.
+Integra backend, frontend, autenticación, base de datos en la nube y arquitectura profesional, ideal para entornos empresariales reales.
 
 ### 🚀 TechLab Products API — Gestión segura, escalable y profesional.
 
-**¡Dale una ⭐ si este proyecto te resulta útil!**
+⭐ ¡Deja una estrella si te fue útil!
 
 </div>
 ```
+
+---
+
