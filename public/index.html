@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechLab Products API - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>🚀 TechLab Products API</h1>
+            <p>Dashboard de prueba - Backend NodeJS</p>
+        </div>
+    </header>
+
+    <main class="main container">
+        <!-- Sección de Autenticación -->
+        <section id="authSection" class="auth-section">
+            <!-- Formulario de Login -->
+            <article class="card">
+                <h2>🔐 Iniciar Sesión</h2>
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" required placeholder="admin@techlab.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña:</label>
+                        <input type="password" id="loginPassword" required placeholder="admin123">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ingresar al Sistema</button>
+                </form>
+                <div id="authMessage" class="message-container"></div>
+                
+                <!-- Enlace para cambiar a registro -->
+                <div class="auth-switch">
+                    <p>¿No tienes cuenta? <a href="#" onclick="auth.showRegister()">Regístrate aquí</a></p>
+                </div>
+            </article>
+
+            <!-- Formulario de Registro (oculto inicialmente) -->
+            <article id="registerCard" class="card hidden">
+                <h2>📝 Crear Cuenta</h2>
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="registerName">Nombre completo:</label>
+                        <input type="text" id="registerName" required placeholder="Juan Perez">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email:</label>
+                        <input type="email" id="registerEmail" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña:</label>
+                        <input type="password" id="registerPassword" required minlength="6" placeholder="Mínimo 6 caracteres">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmar Contraseña:</label>
+                        <input type="password" id="registerConfirmPassword" required minlength="6" placeholder="Repite tu contraseña">
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Crear Cuenta</button>
+                </form>
+                <div id="registerMessage" class="message-container"></div>
+                
+                <!-- Enlace para cambiar a login -->
+                <div class="auth-switch">
+                    <p>¿Ya tienes cuenta? <a href="#" onclick="auth.showLogin()">Inicia sesión aquí</a></p>
+                </div>
+            </article>
+        </section>
+
+        <!-- Dashboard Principal -->
+        <section id="dashboardSection" class="dashboard-section hidden">
+            <!-- Información del Usuario -->
+            <article class="card user-card">
+                <header class="card-header">
+                    <h2>👤 Información de Usuario</h2>
+                    <button class="btn btn-secondary" onclick="auth.logout()">Cerrar Sesión</button>
+                </header>
+                <div id="userInfo" class="user-info"></div>
+            </article>
+
+            <!-- Gestión de Productos -->
+            <section class="products-section">
+                <article class="card">
+                    <header class="card-header">
+                        <h2>📦 Gestión de Productos</h2>
+                    </header>
+                    
+                    <!-- Formulario de Creación/Edición -->
+                    <form id="createProductForm" class="product-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productName">Nombre del Producto:</label>
+                                <input type="text" id="productName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productPrice">Precio:</label>
+                                <input type="number" id="productPrice" required min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productCategory">Categoría:</label>
+                                <input type="text" id="productCategory">
+                            </div>
+                            <div class="form-group">
+                                <label for="productStock">Stock Inicial:</label>
+                                <input type="number" id="productStock" value="10" min="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="productDescription">Descripción:</label>
+                            <textarea id="productDescription" class="form-control" placeholder="Descripción del producto"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">➕ Crear Producto</button>
+                            <button type="button" id="cancelEditBtn" class="btn btn-secondary hidden" onclick="products.cancelEdit()">
+                                ❌ Cancelar Edición
+                            </button>
+                        </div>
+                    </form>
+                </article>
+
+                <!-- Lista de Productos -->
+                <article class="card">
+                    <header class="card-header">
+                        <h2>📋 Lista de Productos</h2>
+                        <button class="btn btn-secondary" onclick="products.loadProducts()">🔄 Actualizar Lista</button>
+                    </header>
+                    <div id="productsContainer">
+                        <div id="productsList" class="products-grid"></div>
+                        <div id="productsMessage" class="message-container"></div>
+                    </div>
+                </article>
+            </section>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>TechLab Products API &copy; 2025 - Backend con Express + Firebase</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
